@@ -11,12 +11,17 @@ hoping to use it as a black box, without getting into too much detail of how it 
 doing after pushing any changes to the repository.
 
 I followed the exact steps as described in the readme:
-1. Run `make image` from the root of the pages-gem directory to build the `gh-pages` image
+1. Run docker build from the root of the pages-gem directory:
+
+    ```sh
+    docker build -t gh-pages .
+    ```
+
 2. Start an instance of the server by running this command from the root of the site:
 
-```sh
-docker run --rm -it -p 4000:4000 -v ${PWD}:/src/site gh-pages
-```
+    ```sh
+    docker run --rm -it -p 4000:4000 -v ${PWD}:/src/site gh-pages
+    ```
 
 But it didn't work for me - the generated site was just plain text:
 ![Screenshot of site not working](/assets/images/2023-10-10/site_not_working.png)

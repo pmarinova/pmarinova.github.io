@@ -7,3 +7,5 @@ google_analytics: G-5F51LDB5Z3
 theme: minima
 
 github_username: pmarinova
+
+exclude: ['README.md']

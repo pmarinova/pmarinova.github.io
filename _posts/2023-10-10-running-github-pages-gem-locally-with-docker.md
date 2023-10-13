@@ -52,5 +52,5 @@ Now the site is running:
 ![Screenshot of site working](/assets/images/2023-10-10/site_working.png)
 
 As someone who has no experience with Ruby, Jekyll and the rest of the GitHub Pages stack I would say the containerized approach 
-for github-pages needs improvement or at least a better readme.
-
+for github-pages needs improvement or at least a better readme. I submitted an [issue](https://github.com/github/pages-gem/issues/891)
+for this and perhaps someone will clarify how the container should be used.

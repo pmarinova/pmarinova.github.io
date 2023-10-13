@@ -1,5 +1,9 @@
 title: PM's blog
 author: Plamena Marinova
+email: plamena.marinova@gmail.com
 description: My personal blog
-theme: minima
 google_analytics: G-5F51LDB5Z3
+
+theme: minima
+
+github_username: pmarinova

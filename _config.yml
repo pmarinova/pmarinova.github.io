@@ -3,9 +3,13 @@ author: Plamena Marinova
 email: plamena.marinova@gmail.com
 description: My personal blog
 google_analytics: G-5F51LDB5Z3
+url: https://pmarinova.github.io
 
 theme: minima
 
 github_username: pmarinova
 
 exclude: ['README.md']
+
+plugins:
+  - jekyll-sitemap

@@ -2,12 +2,12 @@ This is the repository from which my site https://pmarinova.github.io/ is genera
 
 To run the site locally with Docker:
 
-1. Build a recent github-pages image (replace v228 with the latest tagged release)
+1. Build a recent github-pages image (replace v229 with the latest tagged release)
 
 ```sh
 git clone https://github.com/github/pages-gem
 cd pages-gem
-git checkout v228
+git checkout v229
 docker build -t gh-pages .
 ```
 

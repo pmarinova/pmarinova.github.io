@@ -54,3 +54,19 @@ Now the site is running:
 As someone who has no experience with Ruby, Jekyll and the rest of the GitHub Pages stack I would say the containerized approach 
 for github-pages needs improvement or at least a better readme. I submitted an [issue](https://github.com/github/pages-gem/issues/891)
 for this and perhaps someone will clarify how the container should be used.
+
+#### Update 2024-02-12
+
+After updating to the latest version of the pages-gem (v229), I got a new error:
+> /usr/local/bundle/gems/jekyll-3.9.4/lib/jekyll/commands/serve/servlet.rb:3: warning: webrick was loaded from the standard library, but is not part of the default gems since Ruby 3.0.0. Add webrick to your Gemfile or gemspec. Also contact author of jekyll-3.9.4 to add webrick into its gemspec.
+> /usr/local/lib/ruby/3.3.0/bundled_gems.rb:74:in `require': cannot load such file -- webrick (LoadError)
+
+This was because the docker image was updated to Ruby 3 and causes [issue 752](https://github.com/github/pages-gem/issues/752).
+
+The workaround is to add the `webrick` dependency explicitly in your Gemfile like this:
+
+```ruby
+source 'https://rubygems.org'
+gem 'github-pages', group: :jekyll_plugins
+gem "webrick", "~> 1.8"
+```

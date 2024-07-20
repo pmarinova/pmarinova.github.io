@@ -4,8 +4,13 @@ date: 2024-07-19
 ---
 
 After my first attempt at [running the github-pages gem locally]({% post_url 2023-10-10-running-github-pages-gem-locally-with-docker %}), I realized that the docker image in the [pages-gem](https://github.com/github/pages-gem) repository is intended for development of the github-pages gem itself.
+The image contains the source of the github-pages gem and installs it from a local folder, which is not something
+you need if you only need to run a GitHub Pages site.
 
-For simply running the latest version of the github-pages gem from [rubygems.org](https://rubygems.org/), you can use a much simpler docker image. The `Dockerfile` looks like this:
+For simply running the latest version of the github-pages gem, you can use a docker image which
+installs the latest version of github-pages from [rubygems.org](https://rubygems.org/).
+
+The `Dockerfile` looks like this:
 
 ```dockerfile
 FROM ruby:3.3
@@ -21,6 +26,18 @@ The `Gemfile` looks like this:
 source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 gem 'webrick', '~> 1.8'
+```
+
+The `bundle install` command will install the gems specified in the `Gemfile`. The `github-pages` gem will bootstrap all dependencies for setting up a local Jekyll environment in sync with GitHub Pages and the `webrick` gem is required by Jekyll but no longer included with Ruby 3 so needs to be installed separately.
+
+You can build the docker image and run it from the site root folder like this:
+
+```sh
+git clone https://gist.github.com/0b345a2656abe079c322ad0a90a32c61.git github-pages-docker
+cd github-pages-docker
+docker build -t gh-pages .
+cd /github-pages-site
+docker run --rm -it -p 4000:4000 -v ${PWD}:/src/site gh-pages
 ```
 
 To make things easier to run, you can place this docker `compose.yaml` file at the root of the site and simply run `docker compose up`:

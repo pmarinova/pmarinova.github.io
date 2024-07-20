@@ -28,7 +28,7 @@ gem 'github-pages', group: :jekyll_plugins
 gem 'webrick', '~> 1.8'
 ```
 
-The `bundle install` command will install the gems specified in the `Gemfile`. The `github-pages` gem will bootstrap all dependencies for setting up a local Jekyll environment in sync with GitHub Pages and the `webrick` gem is required by Jekyll but no longer included with Ruby 3 so needs to be installed separately.
+The `bundle install` command will install the gems specified in the `Gemfile`: the 'github-pages' gem will bootstrap all dependencies for setting up a local Jekyll environment in sync with GitHub Pages, and the 'webrick' gem is required by Jekyll but no longer included with Ruby 3 so needs to be installed separately.
 
 You can build the docker image and run it from the site root folder like this:
 
@@ -53,3 +53,18 @@ services:
     volumes:
       - "./:/src/site"
 ```
+
+Auto-regeneration did not work for me when running the site on Windows, i.e. the site was not automatically rebuilt and I had to restart Jekyll on each file change. The workaround is to use the `--force_polling` flag which can be specified in the startup command like this:
+
+```yaml
+services:
+  gh-pages:
+    build:
+      context: https://gist.github.com/0b345a2656abe079c322ad0a90a32c61.git
+      dockerfile: Dockerfile.alpine
+    command: sh -c "jekyll serve -H 0.0.0.0 -P 4000 --watch --force_polling"
+    ...
+```
+
+GitHub Gist: 
+__[https://gist.github.com/pmarinova/0b345a2656abe079c322ad0a90a32c61](https://gist.github.com/pmarinova/0b345a2656abe079c322ad0a90a32c61)__

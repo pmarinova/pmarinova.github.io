@@ -3,6 +3,7 @@ services:
     build:
       context: https://gist.github.com/0b345a2656abe079c322ad0a90a32c61.git
       dockerfile: Dockerfile.alpine
+    command: sh -c "jekyll serve -H 0.0.0.0 -P 4000 --watch --force_polling"
     ports:
       - "4000:4000"
     volumes:
